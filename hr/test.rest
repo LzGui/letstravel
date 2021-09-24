@@ -1,0 +1,41 @@
+### GET
+GET http://localhost:8080/users
+
+### GET with invalid ID
+GET http://localhost:8080/users/6136bfaa1a29b152445f0a57
+
+### POST new User
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "name": "John Doe",
+    "password": "5d3307f4-50d2-4420-9ea0-96544d1a7bdb",
+    "email": "john.doe@newtonpaiva.br",
+    "mobile": "+55.31.991234567"
+}
+
+### POST new User
+POST http://localhost:8080/users
+Content-Type: application/json
+
+{
+    "name": "Jane Doe",
+    "password": "1234",
+    "email": "jane.doe@newtonpaiva.br",
+    "mobile": "+55.31.993214531"
+}
+
+### PUT update user
+PUT http://localhost:8080/users/6136bf3e1a29b152445f0a56
+Content-Type: application/json
+
+{
+    "name": "John Doe Jr",
+    "password": "5d3307f4-50d2-4420-9ea0-96544d1a7bdb",
+    "email": "john.doe.jr@newtonpaiva.br",
+    "mobile": "+55.31.991233210"
+}
+
+### DELETE
+DELETE http://localhost:8080/users/6136bf3e1a29b152445f0a56
