@@ -36,12 +36,12 @@ public class PaymentService {
 		pay.setClient(client);
 
 		// Verifica se existe o comprador
-		Buyer buyer = buyerService.searchBuyerCpf(requestPaymentDto.getBuyer().getCpf());
+		Buyer buyer = buyerService.get(requestPaymentDto.getBuyer().getCpf());
 		if (!ObjectUtils.isEmpty(buyer)) {
 			pay.setBuyer(buyer);
 		} else {
 			Buyer newBuyer = conversionService.convert(requestPaymentDto.getBuyer(), Buyer.class);
-			pay.setBuyer(buyerService.saveBuyer(newBuyer));
+			pay.setBuyer(newBuyer);
 		}
 
 		// Verifica a forma de pagamento
@@ -72,7 +72,7 @@ public class PaymentService {
 		return replyPaymentDto;
 	}
 
-	public Payment searchPayment(Long idPayment) {
+	public Payment searchPayment(String idPayment) {
 		Payment pay = paymentRepository.findById(idPayment).orElse(null);
 		if (ObjectUtils.isEmpty(pay)) {
 			return null;
@@ -93,17 +93,12 @@ public class PaymentService {
 		return newCpf + cpf.substring(cpf.length() - 2);
 	}
 
-	public boolean removePayment(Long idPayment) {
+	public boolean removePayment(String idPayment) {
 		Payment pay = paymentRepository.findById(idPayment).orElse(null);
 		if (ObjectUtils.isEmpty(pay)) {
 			return false;
 		}
 		paymentRepository.delete(pay);
 		return true;
-	}
-
-	public Object get(String id) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 }
